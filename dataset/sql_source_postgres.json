@@ -1,0 +1,12 @@
+{
+	"name": "sql_source_postgres",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_adf_sql_database",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": []
+	}
+}
