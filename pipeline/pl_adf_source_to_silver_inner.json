@@ -160,6 +160,43 @@
 					"referenceName": "ls_adf_databricks",
 					"type": "LinkedServiceReference"
 				}
+			},
+			{
+				"name": "Bronze To Silver",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "Landing To Bronze",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/ADF_Databricks_code/Bronze_To_Silver",
+					"baseParameters": {
+						"table_name": {
+							"value": "@activity('Get Table IDs').output.firstRow.silver_table_name",
+							"type": "Expression"
+						},
+						"landing_timestamp": {
+							"value": "@variables('time')",
+							"type": "Expression"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_adf_databricks",
+					"type": "LinkedServiceReference"
+				}
 			}
 		],
 		"parameters": {
