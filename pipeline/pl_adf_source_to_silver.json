@@ -25,7 +25,7 @@
 						"partitionOption": "None"
 					},
 					"dataset": {
-						"referenceName": "sql_source_postgres",
+						"referenceName": "sql_source_sample_data",
 						"type": "DatasetReference"
 					},
 					"firstRowOnly": false
