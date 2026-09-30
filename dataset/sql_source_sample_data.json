@@ -1,5 +1,5 @@
 {
-	"name": "sql_source_postgres",
+	"name": "sql_source_sample_data",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "ls_adf_sql_database",
