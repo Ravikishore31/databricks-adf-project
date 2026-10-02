@@ -16,7 +16,7 @@
 					"referenceName": "ls_keyvault",
 					"type": "LinkedServiceReference"
 				},
-				"secretName": "sql"
+				"secretName": "sqldatabase"
 			}
 		},
 		"connectVia": {
