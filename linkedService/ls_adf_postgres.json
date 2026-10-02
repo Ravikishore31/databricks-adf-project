@@ -12,6 +12,10 @@
 			"sslMode": 2,
 			"authenticationType": "Basic",
 			"encryptedCredential": "demo"
+		},
+		"connectVia": {
+			"referenceName": "integrationRuntime1",
+			"type": "IntegrationRuntimeReference"
 		}
 	}
 }
