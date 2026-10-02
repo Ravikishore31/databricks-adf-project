@@ -1,0 +1,42 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "delta-lake-demo"
+		},
+		"ls_adf_postgres_password": {
+			"value": ""
+		},
+		"ls_adf_sql_database_password": {
+			"value": ""
+		},
+		"ls_adf_databricks_properties_typeProperties_existingClusterId": {
+			"value": "0930-163332-cff66eg2"
+		},
+		"ls_adf_link1_properties_typeProperties_url": {
+			"value": "https://azuredatafactorydemo.dfs.core.windows.net/"
+		},
+		"ls_adf_postgres_properties_typeProperties_server": {
+			"value": "ep-crimson-mouse-b8colmyi-pooler.c-14.us-east-1.aws.neon.tech"
+		},
+		"ls_adf_postgres_properties_typeProperties_database": {
+			"value": "neondb"
+		},
+		"ls_adf_postgres_properties_typeProperties_username": {
+			"value": "neondb_owner"
+		},
+		"ls_adf_sql_database_properties_typeProperties_server": {
+			"value": "adf-demo-project-server.database.windows.net"
+		},
+		"ls_adf_sql_database_properties_typeProperties_database": {
+			"value": "adfdemoproject"
+		},
+		"ls_adf_sql_database_properties_typeProperties_userName": {
+			"value": "ravi876"
+		},
+		"ls_keyvault_properties_typeProperties_baseUrl": {
+			"value": "https://adfdemoprojectkeyvault.vault.azure.net/"
+		}
+	}
+}
