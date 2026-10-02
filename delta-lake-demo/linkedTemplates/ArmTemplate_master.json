@@ -15,10 +15,6 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'ls_adf_sql_database'"
 		},
-		"ls_adf_databricks_properties_typeProperties_existingClusterId": {
-			"type": "string",
-			"defaultValue": "0930-163332-cff66eg2"
-		},
 		"ls_adf_link1_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://azuredatafactorydemo.dfs.core.windows.net/"
@@ -87,6 +83,9 @@
 					"ls_adf_link1_properties_typeProperties_url": {
 						"value": "[parameters('ls_adf_link1_properties_typeProperties_url')]"
 					},
+					"ls_keyvault_properties_typeProperties_baseUrl": {
+						"value": "[parameters('ls_keyvault_properties_typeProperties_baseUrl')]"
+					},
 					"ls_adf_postgres_properties_typeProperties_server": {
 						"value": "[parameters('ls_adf_postgres_properties_typeProperties_server')]"
 					},
@@ -104,12 +103,6 @@
 					},
 					"ls_adf_sql_database_properties_typeProperties_userName": {
 						"value": "[parameters('ls_adf_sql_database_properties_typeProperties_userName')]"
-					},
-					"ls_keyvault_properties_typeProperties_baseUrl": {
-						"value": "[parameters('ls_keyvault_properties_typeProperties_baseUrl')]"
-					},
-					"ls_adf_databricks_properties_typeProperties_existingClusterId": {
-						"value": "[parameters('ls_adf_databricks_properties_typeProperties_existingClusterId')]"
 					}
 				}
 			},

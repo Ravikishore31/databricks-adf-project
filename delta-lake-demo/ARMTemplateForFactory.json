@@ -15,10 +15,6 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'ls_adf_sql_database'"
 		},
-		"ls_adf_databricks_properties_typeProperties_existingClusterId": {
-			"type": "string",
-			"defaultValue": "0930-163332-cff66eg2"
-		},
 		"ls_adf_link1_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://azuredatafactorydemo.dfs.core.windows.net/"
@@ -807,7 +803,14 @@
 						},
 						"secretName": "databricks"
 					},
-					"existingClusterId": "[parameters('ls_adf_databricks_properties_typeProperties_existingClusterId')]"
+					"newClusterNodeType": "Standard_D4ds_v4",
+					"newClusterNumOfWorker": "1",
+					"newClusterSparkEnvVars": {
+						"PYSPARK_PYTHON": "/databricks/python3/bin/python3"
+					},
+					"newClusterVersion": "18.x-scala2.13",
+					"clusterOption": "Fixed",
+					"newClusterInitScripts": []
 				}
 			},
 			"dependsOn": [
@@ -845,9 +848,15 @@
 					},
 					"sslMode": 2,
 					"authenticationType": "Basic"
+				},
+				"connectVia": {
+					"referenceName": "integrationRuntime1",
+					"type": "IntegrationRuntimeReference"
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/integrationRuntime1')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/ls_adf_sql_database')]",
@@ -867,9 +876,15 @@
 						"type": "SecureString",
 						"value": "[parameters('ls_adf_sql_database_password')]"
 					}
+				},
+				"connectVia": {
+					"referenceName": "integrationRuntime1",
+					"type": "IntegrationRuntimeReference"
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/integrationRuntime1')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/ls_keyvault')]",
@@ -880,6 +895,27 @@
 				"type": "AzureKeyVault",
 				"typeProperties": {
 					"baseUrl": "[parameters('ls_keyvault_properties_typeProperties_baseUrl')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/integrationRuntime1')]",
+			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "Managed",
+				"typeProperties": {
+					"computeProperties": {
+						"location": "AutoResolve",
+						"dataFlowProperties": {
+							"computeType": "General",
+							"coreCount": 8,
+							"timeToLive": 10,
+							"cleanup": false,
+							"customProperties": []
+						}
+					}
 				}
 			},
 			"dependsOn": []
