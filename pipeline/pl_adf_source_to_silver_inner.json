@@ -52,7 +52,7 @@
 				"type": "DatabricksNotebook",
 				"dependsOn": [
 					{
-						"activity": "Switch1",
+						"activity": "Check Source System",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -79,6 +79,10 @@
 						},
 						"landing_timestamp": {
 							"value": "@variables('time')",
+							"type": "Expression"
+						},
+						"source_file_format": {
+							"value": "@coalesce(activity('Get Table IDs').output.firstRow.source_file_format, '')",
 							"type": "Expression"
 						}
 					}
@@ -299,7 +303,7 @@
 				}
 			},
 			{
-				"name": "Switch1",
+				"name": "Check Source System",
 				"type": "Switch",
 				"dependsOn": [
 					{
@@ -408,6 +412,12 @@
 												"type": "BinaryReadSettings"
 											}
 										},
+										"sink": {
+											"type": "BinarySink",
+											"storeSettings": {
+												"type": "AzureBlobFSWriteSettings"
+											}
+										},
 										"enableStaging": false
 									},
 									"inputs": [
@@ -418,7 +428,21 @@
 												"folder": {
 													"value": "@activity('Get Table IDs').output.firstRow.source_path",
 													"type": "Expression"
-												}
+												},
+												"container": "source"
+											}
+										}
+									],
+									"outputs": [
+										{
+											"referenceName": "ds_csv_data",
+											"type": "DatasetReference",
+											"parameters": {
+												"folder": {
+													"value": "@concat(\n    activity('Get Table IDs').output.firstRow.source_system,\n    '/',\n    activity('Get Table IDs').output.firstRow.source_table_name,\n    '/',\n    variables('time')\n)",
+													"type": "Expression"
+												},
+												"container": "landing"
 											}
 										}
 									]
